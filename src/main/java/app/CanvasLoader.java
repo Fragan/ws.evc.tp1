@@ -17,6 +17,7 @@ import com.sun.j3d.utils.universe.SimpleUniverse;
 
 public class CanvasLoader extends Canvas3D {
 
+	private static final long serialVersionUID = 1L;
 	private GenericVrmlLoader gvl;
 	private VirtualUniverse universe;
 	private TransformGroup vpTrans;
@@ -41,9 +42,11 @@ public class CanvasLoader extends Canvas3D {
 		// creation d'un navigateur
 		vpTrans = ((SharedUniverse) universe).getViewingPlatform().getViewPlatformTransform(); // noeud camera
 		try {
-		vpTrans.setCapability(TransformGroup.ALLOW_TRANSFORM_WRITE);
+			vpTrans.setCapability(TransformGroup.ALLOW_TRANSFORM_WRITE);
 		}
 		catch(Exception e) {}
+		
+		((SharedUniverse) universe).setTransCamera(vpTrans);
 		
 		KeyNavigatorBehavior keyNavBeh = new KeyNavigatorBehavior(vpTrans);
 		keyNavBeh.setSchedulingBounds(new BoundingSphere(new Point3d(), 1000.0));
@@ -59,6 +62,10 @@ public class CanvasLoader extends Canvas3D {
 	
 	public TransformGroup getVpTrans() {
 		return vpTrans;
+	}
+	
+	public VirtualUniverse getUniverse() {
+		return universe;
 	}
 	
 }

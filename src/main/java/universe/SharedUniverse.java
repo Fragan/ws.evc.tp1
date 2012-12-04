@@ -25,15 +25,27 @@ public class SharedUniverse extends SimpleUniverse {
 
 	/**
 	 * Deplacement vers un point absolu de l'univers
+	 * 
 	 * @param x
 	 * @param y
 	 * @param z
 	 */
-	public void cameraMoveTo(int x, int y, int z) {
+	public void cameraTeleportTo(double x, double y, double z) {
+
+		Vector3d translate = new Vector3d();
+		translate.set(x, y, z);
+		
 		Transform3D t3D = new Transform3D();
 		
+		transCamera.getTransform(t3D);
+		
 		// setTranslation est absolu a l'univers
-		t3D.setTranslation(new Vector3d(x, y, z));
+		t3D.setTranslation(translate);
+		transCamera.setTransform(t3D);
+	}
+	
+	public void setTransCamera(TransformGroup transCamera) {
+		this.transCamera = transCamera;
 	}
 
 }

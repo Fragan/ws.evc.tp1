@@ -1,5 +1,7 @@
 package app;
 
+import interaction.KeyCameraInteractor;
+
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -21,7 +23,7 @@ public class App extends JFrame {
 		
 		cp = new ControlsPanel();
 		canvas = new CanvasLoader();
-		
+		canvas.add(new KeyCameraInteractor(canvas.getMouseInteractor()));
 		
 		cp.getTeleportToButton().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -39,11 +41,14 @@ public class App extends JFrame {
 		pack();
 	}
 	
+	
 
 
 	public static void main(String[] args) {
 		App app = new App();
 		app.setVisible(true);
 	}
+	
+	
 
 }

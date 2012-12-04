@@ -2,7 +2,6 @@ package universe;
 
 import javax.media.j3d.Transform3D;
 import javax.media.j3d.TransformGroup;
-import javax.vecmath.Tuple3d;
 import javax.vecmath.Vector3d;
 
 import app.CanvasLoader;

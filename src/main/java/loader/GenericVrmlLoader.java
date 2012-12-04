@@ -44,7 +44,6 @@ public class GenericVrmlLoader {
 //		u.addBranchGraph(scene);
 //	}
 
-	@SuppressWarnings("unchecked")
 	public BranchGroup createSceneGraph() {
 		BranchGroup objRoot = new BranchGroup();
 

@@ -1,7 +1,5 @@
 package app;
 
-import java.awt.Canvas;
-
 import javax.media.j3d.BoundingSphere;
 import javax.media.j3d.BranchGroup;
 import javax.media.j3d.Canvas3D;

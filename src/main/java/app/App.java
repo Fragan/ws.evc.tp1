@@ -23,7 +23,7 @@ public class App extends JFrame {
 		
 		cp = new ControlsPanel();
 		canvas = new CanvasLoader();
-		canvas.add(new KeyCameraInteractor(canvas.getMouseInteractor()));
+		canvas.addKeyListener(new KeyCameraInteractor(canvas.getMouseInteractor()));
 		
 		cp.getTeleportToButton().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

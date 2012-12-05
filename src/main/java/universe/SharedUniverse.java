@@ -19,6 +19,7 @@ public class SharedUniverse extends SimpleUniverse {
 
 	public SharedUniverse(CanvasLoader canvas) {
 		super(canvas);
+		getViewer().getView().setSceneAntialiasingEnable(true); //Yeah !!
 		camera = canvas.getVpTrans();
 	}
 
@@ -43,6 +44,22 @@ public class SharedUniverse extends SimpleUniverse {
 		camera.setTransform(t3D);
 	}
 	
+	public void rotateTo(double h, double d, double r) {
+		Vector3d rotate = new Vector3d();
+		rotate.set(h, d, r);
+		
+		Transform3D t3D = new Transform3D();
+		camera.getTransform(t3D);
+		
+		Vector3d translate = new Vector3d();
+		
+		t3D.get(translate);
+		t3D.setEuler(rotate);
+		t3D.setTranslation(translate);
+		
+		camera.setTransform(t3D);	
+	}
+	
 	public void cameraRelativeTranslate(double dx, double dy, double dz) {
 		Transform3D oldT3D =  new Transform3D();
 		camera.getTransform(oldT3D);
@@ -54,9 +71,22 @@ public class SharedUniverse extends SimpleUniverse {
 		
 		Transform3D newT3D = new Transform3D();
 		newT3D.mul(oldT3D, localT3D);
-		camera.setTransform(newT3D);
+		camera.setTransform(newT3D);	
 		
-		System.out.println("je passe");
+	}
+	
+	public void cameraRelativeRotate(double dh, double dp, double dr) {
+		Transform3D oldT3D =  new Transform3D();
+		camera.getTransform(oldT3D);
+		Vector3d rotate = new Vector3d();
+		rotate.set(dh, dp, dr);
+		
+		Transform3D localT3D = new Transform3D();
+		localT3D.setEuler(rotate);
+		
+		Transform3D newT3D = new Transform3D();
+		newT3D.mul(oldT3D, localT3D);
+		camera.setTransform(newT3D);	
 		
 	}
 	

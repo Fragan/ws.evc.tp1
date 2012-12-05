@@ -2,8 +2,9 @@ package loader;
 
 import java.io.FileNotFoundException;
 
-import javax.media.j3d.Node;
 import javax.media.j3d.TransformGroup;
+
+import object.VirtualObject;
 
 import org.jdesktop.j3d.loaders.vrml97.VrmlLoader;
 
@@ -19,8 +20,8 @@ public class GenericVrmlLoader {
 	}
 
 
-	public TransformGroup load() {
-		TransformGroup objTrans = new TransformGroup();
+	public VirtualObject load() {
+		VirtualObject objTrans = new VirtualObject();
 		objTrans.setCapability(TransformGroup.ALLOW_TRANSFORM_READ);
 		objTrans.setCapability(TransformGroup.ALLOW_TRANSFORM_WRITE);
 		objTrans.setCapability(TransformGroup.ENABLE_PICK_REPORTING);
@@ -33,7 +34,7 @@ public class GenericVrmlLoader {
 		} catch(FileNotFoundException e) {
 			e.printStackTrace();
 		}
-		return objTrans;
+		return  objTrans;
 	}
 
 

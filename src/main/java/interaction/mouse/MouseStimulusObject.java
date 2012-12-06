@@ -62,9 +62,8 @@ public class MouseStimulusObject extends AMouseStimulusState {
 						msd.x2 = ((MouseEvent) events[i]).getX();
 						msd.y2 = ((MouseEvent) events[i]).getY();
 						if (msd.button1Pressed) { // rotation
-							dh = Math.PI * (msd.x2 - msd.x1) / 40.0;
-							dp = Math.PI * (msd.y1 - msd.y2) / 40.0;
-							dr = (dh - dp) / 2.0;
+							dh = (msd.x2 - msd.x1) /3.0;
+							dp = (msd.y1 - msd.y2) / 3.0;
 						}
 						if (msd.button2Pressed ) { // zoom
 							dz = (msd.x1 - msd.x2 + msd.y2 - msd.y1) / 40.0;

@@ -6,9 +6,11 @@ import java.awt.FlowLayout;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
+import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JRadioButton;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
 
@@ -22,6 +24,9 @@ public class CameraControlsPanel extends JPanel {
 	private JSpinner spCoordX;
 	private JSpinner spCoordY;
 	private JSpinner spCoordZ;
+	
+	private JRadioButton rbNormalMCR;
+	private JRadioButton rbSceneMCR;
 	
 	public CameraControlsPanel() {
 		super();
@@ -40,6 +45,30 @@ public class CameraControlsPanel extends JPanel {
 		JLabel infoLabel = new JLabel("<html>To regain focus and use the keyboard,<br/> first click on the canvas.</html>");
 		infoPanel.add(infoLabel);
 		
+		/*
+		 * MODES
+		 */
+		JPanel modesPanel = new JPanel();
+		modesPanel.setSize(220, 100);
+		modesPanel.setPreferredSize(modesPanel.getSize());
+		modesPanel.setBorder(BorderFactory.createTitledBorder("Modes"));
+		
+		//Camera rotation scene ?
+		ButtonGroup bgModeCameraRotation = new ButtonGroup();
+		JPanel modesMCRPanel = new JPanel();
+		modesMCRPanel.setLayout(new BoxLayout(modesMCRPanel, BoxLayout.X_AXIS));
+		modesMCRPanel.setSize(210, 50);
+		modesMCRPanel.setPreferredSize(modesMCRPanel.getSize());
+		modesMCRPanel.setBorder(BorderFactory.createTitledBorder("Camera rotation mode"));
+		rbNormalMCR = new JRadioButton("First person");		
+		rbSceneMCR = new JRadioButton("Scene");
+		bgModeCameraRotation.add(rbNormalMCR);
+		bgModeCameraRotation.add(rbSceneMCR);
+		modesMCRPanel.add(rbNormalMCR);
+		modesMCRPanel.add(rbSceneMCR);
+		rbNormalMCR.setSelected(true);
+		modesPanel.add(modesMCRPanel);
+				
 		/*
 		 * COORDINATES
 		 */
@@ -90,6 +119,7 @@ public class CameraControlsPanel extends JPanel {
 		 * ADD ALL
 		 */
 		add(infoPanel);
+		add(modesPanel);
 		add(containerCoordPanel);
 		add(controlsButtonsPanel);		
 	}
@@ -108,5 +138,13 @@ public class CameraControlsPanel extends JPanel {
 
 	public JButton getTeleportToButton() {
 		return teleportToButton;
+	}
+
+	public JRadioButton getRbNormalMCR() {
+		return rbNormalMCR;
+	}
+
+	public JRadioButton getRbSceneMCR() {
+		return rbSceneMCR;
 	}
 }

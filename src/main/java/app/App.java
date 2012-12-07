@@ -30,6 +30,18 @@ public class App extends JFrame {
 			}
 		});
 		
+		//Add Listener to camera rotation mode
+		cp.getRbNormalMCR().addActionListener(new ActionListener() {			
+			public void actionPerformed(ActionEvent arg0) {			
+				canvas.getUniverse().setModeCameraRotationScene(false);
+			}
+		});
+		cp.getRbSceneMCR().addActionListener(new ActionListener() {			
+			public void actionPerformed(ActionEvent arg0) {			
+				canvas.getUniverse().setModeCameraRotationScene(true);
+			}
+		});
+		
 		//Add elements
 		setLayout(new BorderLayout());
 		add(cp, BorderLayout.WEST);

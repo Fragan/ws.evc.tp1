@@ -11,6 +11,7 @@ import javax.media.j3d.WakeupOnAWTEvent;
 
 public class MouseStimulusCamera extends AMouseStimulusState {
 
+	
 	public MouseStimulusCamera(MouseInteractorData msd) {
 		super(msd);
 	}

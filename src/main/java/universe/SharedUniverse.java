@@ -6,22 +6,34 @@ import javax.vecmath.Vector3d;
 
 import app.CanvasLoader;
 
-import com.sun.corba.se.impl.ior.OldObjectKeyTemplateBase;
 import com.sun.j3d.utils.universe.SimpleUniverse;
 
 public class SharedUniverse extends SimpleUniverse {
 
 	private TransformGroup camera;
+	private boolean modeCameraRotationScene;
 
 	public SharedUniverse(TransformGroup transCamera) {
 		super();
 		this.camera = transCamera;
+		modeCameraRotationScene = false;
 	}
 
 	public SharedUniverse(CanvasLoader canvas) {
 		super(canvas);
 		getViewer().getView().setSceneAntialiasingEnable(true); // Yeah !!
 		camera = canvas.getVpTrans();
+		modeCameraRotationScene = false;
+	}
+	
+	
+
+	public boolean isModeCameraRotationScene() {
+		return modeCameraRotationScene;
+	}
+
+	public void setModeCameraRotationScene(boolean modeCameraRotationScene) {
+		this.modeCameraRotationScene = modeCameraRotationScene;
 	}
 
 	/**
@@ -75,7 +87,6 @@ public class SharedUniverse extends SimpleUniverse {
 		camera.setTransform(newT3D);
 
 	}
-
 	public void cameraRelativeRotate(double dh, double dp, double dr) {
 		Transform3D oldT3D = new Transform3D();
 		camera.getTransform(oldT3D);
@@ -86,18 +97,23 @@ public class SharedUniverse extends SimpleUniverse {
 		y = Math.PI * dp / 180;
 		z = Math.PI * dr / 180;
 
-		localT3D.rotY(-Math.sin(x) * Math.cos(y));
-		oldT3D.mul(localT3D);
+		localT3D.setEuler(new Vector3d(y,-x,z));
+		//localT3D.rotY(-Math.sin(x) * Math.cos(y));
+		//oldT3D.mul(localT3D);
 		
-		localT3D.rotX(Math.cos(x) * Math.sin(y));
-		oldT3D.mul(localT3D);
+		//localT3D.rotX(Math.cos(x) * Math.sin(y));
+		//oldT3D.mul(localT3D);		
+		//localT3D.rotZ(z);
 		
-		localT3D.rotZ(z);
-		oldT3D.mul(localT3D);
+		if (modeCameraRotationScene)
+			oldT3D.mul(localT3D, oldT3D);
+		else
+			oldT3D.mul(localT3D);
 		
 		camera.setTransform(oldT3D);
 
 	}
+
 
 	public void objectRotate(TransformGroup objectInInteraction, double dh,
 			double dp, double dr) {

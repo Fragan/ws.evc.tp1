@@ -6,6 +6,7 @@ import javax.vecmath.Vector3d;
 
 import app.CanvasLoader;
 
+import com.sun.corba.se.impl.ior.OldPOAObjectKeyTemplate;
 import com.sun.j3d.utils.universe.SimpleUniverse;
 
 public class SharedUniverse extends SimpleUniverse {
@@ -13,8 +14,9 @@ public class SharedUniverse extends SimpleUniverse {
 	private TransformGroup camera;
 	private boolean modeCameraRotationScene;
 
-	public SharedUniverse(TransformGroup transCamera) {
+	public SharedUniverse(TransformGroup transCamera, TransformGroup scene) {
 		super();
+		getViewer().getView().setSceneAntialiasingEnable(true); // Yeah !!
 		this.camera = transCamera;
 		modeCameraRotationScene = false;
 	}
@@ -119,32 +121,17 @@ public class SharedUniverse extends SimpleUniverse {
 			double dp, double dr) {
 		
 		Transform3D oldT3D = new Transform3D();
-		objectInInteraction.getTransform(oldT3D);		
-		
-		Transform3D tx = new Transform3D();
-		Transform3D ty = new Transform3D();
-		Transform3D tz = new Transform3D();
-		
+		objectInInteraction.getTransform(oldT3D);	
 		Transform3D tc = new Transform3D();
-		//camera.getTransform(tc);
-	
+				
 		double x = 0, y = 0, z = 0;
-		x = Math.PI * dh / 180;
+		x = (Math.PI * dh / 180);
 		y = Math.PI * dp / 180;
-		z = Math.PI * dr / 180;
+		z = Math.PI * dr / 180;		
 
-		tx.rotX(x);
-		tc.mul(tx);
-		
-		ty.rotY(y);
-		tc.mul(ty);
-		
-		tz.rotZ(z);		
-		tc.mul(tz);
-		
+		tc.setEuler(new Vector3d(-y ,x ,z));
 		oldT3D.mul(tc);
 		
-
 		objectInInteraction.setTransform(oldT3D);
 	}
 

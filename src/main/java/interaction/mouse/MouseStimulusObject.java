@@ -64,17 +64,19 @@ public class MouseStimulusObject extends AMouseStimulusState {
 						if (msd.button1Pressed) { // rotation
 							dh = (msd.x2 - msd.x1) /3.0;
 							dp = (msd.y1 - msd.y2) / 3.0;
+							msd.sharedUniverse.objectRotate(msd.objectInInteraction, dh, dp, dr);
 						}
 						if (msd.button2Pressed ) { // zoom
 							dz = (msd.x1 - msd.x2 + msd.y2 - msd.y1) / 40.0;
+							msd.sharedUniverse.objectTranslate(msd.objectInInteraction, dx, dy, dz);
 						}
 						if (msd.button3Pressed) { // translation dans le plan de
 												// l'�cran
 							dx = (msd.x2 - msd.x1) / 40.0;
 							dy = (msd.y1 - msd.y2) / 40.0;
+							msd.sharedUniverse.objectTranslate(msd.objectInInteraction, dx, dy, dz);
 						}
-						msd.sharedUniverse.objectTranslate(msd.objectInInteraction, dx, dy, dz);
-						msd.sharedUniverse.objectRotate(msd.objectInInteraction, dh, dp, dr);
+						
 						msd.x1 = msd.x2;
 						msd.y1 = msd.y2;
 					}
